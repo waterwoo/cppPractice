@@ -1,6 +1,13 @@
 #include <iostream>
+#include "sumOfTwoInt.h"
+
+using namespace std;
+
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    sumOfTwoInt s;
+    int result = s.getSum(-1, 1);
+    cout << result << endl;
+
     return 0;
 }
