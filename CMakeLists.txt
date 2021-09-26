@@ -3,4 +3,4 @@ project(cppPractice)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(cppPractice main.cpp sumOfTwoInt.cpp sumOfTwoInt.h)
+add_executable(cppPractice main.cpp sumOfTwoInt.cpp sumOfTwoInt.h climbStairs.cpp climbStairs.h minCostClimbingStairs.cpp minCostClimbingStairs.h)

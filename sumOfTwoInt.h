@@ -20,6 +20,7 @@ public:
         //        return a^b;
 
 
+
         // 官方题解
         while (b != 0) {
             unsigned int carry = (unsigned int)(a & b) << 1;
