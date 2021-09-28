@@ -5,5 +5,6 @@
 #include "minCostClimbingStairs.h"
 
 int minCostClimbingStairs::miCostClimbingStairs(vector<int> &cost) {
+
     return 0;
 }
