@@ -1,13 +1,13 @@
 #include <iostream>
-#include "sumOfTwoInt.h"
+#include "numDecodings.h"
+#include "binaryTreeNode.h"
 
 using namespace std;
 
 
 int main() {
-    sumOfTwoInt s;
-    int result = s.getSum(-1, 1);
-    cout << result << endl;
+    binaryTreeNode *root;
 
+    tree->preorderTraversal();
     return 0;
 }
