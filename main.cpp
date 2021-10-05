@@ -1,13 +1,15 @@
 #include <iostream>
-#include "numDecodings.h"
-#include "binaryTreeNode.h"
+#include <string>
+#include "licenseKeyFormatting.h"
+#include <time.h>
 
 using namespace std;
 
 
 int main() {
-    binaryTreeNode *root;
+    float a=1.06;
+    int b=a*100;
 
-    tree->preorderTraversal();
+    cout << b << endl;
     return 0;
 }
