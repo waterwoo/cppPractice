@@ -6,9 +6,8 @@ using namespace std;
 
 
 int main() {
-    TreeNode * node;
     binaryTreeNode *root;
 
-    root->preorderTraversal(node);
+    tree->preorderTraversal();
     return 0;
 }

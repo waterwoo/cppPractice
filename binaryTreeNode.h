@@ -26,8 +26,7 @@ class binaryTreeNode {
 private:
     void preOrder(TreeNode *root, vector<int> &res);
     void inOrder(TreeNode *root, vector<int> &res);
-    void postOrder(TreeNode *root, vector<int> &res);
-    void levelOrder(TreeNode *root, vector<int> &res);
+    void biOrder(TreeNode *root, vector<int> &res);
 public:
     vector<int> preorderTraversal(TreeNode* root) ;
 

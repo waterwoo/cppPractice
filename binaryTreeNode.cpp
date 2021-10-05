@@ -14,21 +14,6 @@ void binaryTreeNode::preOrder(TreeNode *root, vector<int> &res){
     preOrder(root->right, res);
 }
 
-void binaryTreeNode::inOrder(TreeNode *root, vector<int> &res) {
-    if (root == nullptr)
-        return;
-    inOrder(root->left, res);
-    res.push_back(root->val);
-    inOrder(root->right, res);
-}
-
-void binaryTreeNode::postOrder(TreeNode *root, vector<int> &res) {
-    if (root == nullptr)
-        return;
-    inOrder(root->left, res);
-    inOrder(root->right, res);
-    res.push_back(root->val);
-}
 
 
 vector<int> binaryTreeNode::preorderTraversal(TreeNode* root) {
@@ -37,6 +22,20 @@ vector<int> binaryTreeNode::preorderTraversal(TreeNode* root) {
     return res;
 }
 
-void binaryTreeNode::levelOrder(TreeNode *root, vector<int> &res) {
-
+void binaryTreeNode::inOrder(TreeNode *root, vector<int> &res) {
+    if (root == nullptr)
+        return;
+    inOrder(root->left, res);
+    res.push_back(root->val);
+    inOrder(root->right, res);
 }
+
+void binaryTreeNode::biOrder(TreeNode *root, vector<int> &res) {
+    if (root == nullptr)
+        return;
+    inOrder(root->left, res);
+    inOrder(root->right, res);
+    res.push_back(root->val);
+}
+
+
