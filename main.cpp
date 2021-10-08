@@ -9,10 +9,9 @@ using namespace std;
 
 
 int main() {
-    vector<int> nums{2,2,3,1};
+    int n=10;
     solutions sl;
-    auto result = sl.thirdMax(nums);
-
+    auto result = sl.integerBreak(n);
     cout << result << endl;
     return 0;
 }
