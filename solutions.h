@@ -13,6 +13,7 @@ public:
     int thirdMax(std::vector<int>& nums);
     int countSegments(std::string s);
     int integerBreak(int n);
+    bool canPartition(std::vector<int>& nums);
 };
 
 

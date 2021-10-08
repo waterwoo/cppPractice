@@ -9,9 +9,9 @@ using namespace std;
 
 
 int main() {
-    string s = "a b c d";
+    int n=10;
     solutions sl;
-    auto result = sl.countSegments(s);
+    auto result = sl.integerBreak(n);
     cout << result << endl;
     return 0;
 }
