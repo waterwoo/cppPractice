@@ -3,7 +3,6 @@
 //
 
 #include "solutions.h"
-#include <iostream>
 #include <algorithm>
 
 int solutions::thirdMax(std::vector<int> &nums) {
@@ -15,10 +14,35 @@ int solutions::thirdMax(std::vector<int> &nums) {
     for (int j = 1; j < length; ++j) {
         if (i == 2)
             break;
-        if (nums[j] < nums[j-1]){
+        if (nums[j] < nums[j - 1]) {
             result = nums[j];
             ++i;
         }
     }
-    return result;
+    if (i < 2)
+        return nums[0];
+    else
+        return result;
+}
+
+int solutions::countSegments(std::string s) {
+    int length = s.size();
+    int count = 0;
+    for (int i = 0; i < length; ++i) {
+        if (s[i] != ' ') {
+            ++count;
+            while (s[i] != ' ' && i < length)
+                ++i;
+        }
+    }
+    return count;
+}
+
+int solutions::integerBreak(int n) {
+    std::vector<int> dp(n+1);
+    dp[2] = 1;
+    for (int i = 3; i <= n; ++i) {
+
+    }
+    return dp[n];
 }

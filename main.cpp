@@ -9,9 +9,9 @@ using namespace std;
 
 
 int main() {
-    vector<int> nums{1,2,3,4,5,8,9};
+    string s = "a b c d";
     solutions sl;
-    auto result = sl.thirdMax(nums);
+    auto result = sl.countSegments(s);
     cout << result << endl;
     return 0;
 }
