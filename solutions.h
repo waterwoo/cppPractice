@@ -15,6 +15,7 @@ public:
     int integerBreak(int n);
     bool canPartition(std::vector<int>& nums);
     int lastStoneWeightII(std::vector<int>& stones);
+    int maxSubArray(std::vector<int>& nums);
 };
 
 

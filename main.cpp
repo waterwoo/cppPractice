@@ -9,9 +9,9 @@ using namespace std;
 
 
 int main() {
-    vector<int> nums{1,5,11,5};
+    vector<int> nums{-2};
     solutions sl;
-    auto result = sl.canPartition(nums);
-    cout << result << endl;
+    auto result = sl.maxSubArray(nums);
+    cout<< result << endl;
     return 0;
 }

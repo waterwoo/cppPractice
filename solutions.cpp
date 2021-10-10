@@ -81,9 +81,27 @@ bool solutions::canPartition(std::vector<int> &nums) {
 
 int solutions::lastStoneWeightII(vector<int> &stones) {
     int sum = accumulate(stones.begin(), stones.end(),0);
-    if (!sum%2)
+    // 偶数和1位与运算,结果为0
+    if (sum&1)
         return false;
 
     return 0;
+}
+
+int solutions::maxSubArray(vector<int> &nums) {
+    int thisSubSum = 0, maxSum = 0;
+    int maxEle = *max_element(nums.begin(), nums.end());
+    unsigned n = nums.size();
+    for (int i = 0; i < n; ++i) {
+        thisSubSum += nums[i];
+        if (thisSubSum < 0)
+            thisSubSum = 0;
+        if (thisSubSum > maxSum)
+            maxSum = thisSubSum;
+    }
+    if (maxSum)
+        return maxSum;
+    else
+        return maxEle;
 }
 
