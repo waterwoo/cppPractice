@@ -4,6 +4,9 @@
 
 #include "solutions.h"
 #include <algorithm>
+#include<numeric>
+
+using namespace std;
 
 int solutions::thirdMax(std::vector<int> &nums) {
     std::sort(nums.begin(), nums.end());
@@ -39,12 +42,12 @@ int solutions::countSegments(std::string s) {
 }
 
 int solutions::integerBreak(int n) {
-    std::vector<int> dp(n+1);
+    std::vector<int> dp(n + 1);
     dp[2] = 1;
     int maxS = 0;
     for (int i = 3; i <= n; ++i) {
-        for (int j = 1; j <= i/2; ++j) {
-            maxS = std::max(std::max(j*(i-j), j*dp[i-j]), maxS);
+        for (int j = 1; j <= i / 2; ++j) {
+            maxS = std::max(std::max(j * (i - j), j * dp[i - j]), maxS);
         }
         dp[i] = maxS;
     }
@@ -52,16 +55,35 @@ int solutions::integerBreak(int n) {
 }
 
 bool solutions::canPartition(std::vector<int> &nums) {
-    int length = nums.size();
-    if (nums.size() <2)
+    auto n = nums.size();
+    int sum = accumulate(nums.begin(), nums.end(), 0);
+    int maxNum = *max_element(nums.begin(), nums.end());
+    if (sum % 2)
         return false;
-    int sum = 0;
-    for (int i = 0; i < length; ++i) {
-        sum+=nums[length];
+    int target = sum / 2;
+    if (maxNum > target)
+        return false;
+    vector<vector<int>> dp(n, vector<int>(target + 1, 0));
+    for (int i = 0; i < n; ++i) {
+        dp[i][0] = 1;
     }
-    if (sum%2)
+    dp[0][nums[0]] = 1;
+    for (int i = 1; i < n; ++i) {
+        for (int j = 1; j <= target; ++j) {
+            if (j - nums[i] > 0)
+                dp[i][j] = dp[i - 1][j] || dp[i - 1][j - nums[i]];
+            else
+                dp[i][j] = dp[i - 1][j];
+        }
+    }
+    return dp[n - 1][target];
+}
+
+int solutions::lastStoneWeightII(vector<int> &stones) {
+    int sum = accumulate(stones.begin(), stones.end(),0);
+    if (!sum%2)
         return false;
-    int target=sum/2;
-    std::vector<int> dp(length+1, 4);
+
+    return 0;
 }
 
