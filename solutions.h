@@ -14,6 +14,7 @@ public:
     int countSegments(std::string s);
     int integerBreak(int n);
     bool canPartition(std::vector<int>& nums);
+    int lastStoneWeightII(std::vector<int>& stones);
 };
 
 
