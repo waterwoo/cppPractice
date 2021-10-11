@@ -80,9 +80,9 @@ bool solutions::canPartition(std::vector<int> &nums) {
 }
 
 int solutions::lastStoneWeightII(vector<int> &stones) {
-    int sum = accumulate(stones.begin(), stones.end(),0);
+    int sum = accumulate(stones.begin(), stones.end(), 0);
     // 偶数和1位与运算,结果为0
-    if (sum&1)
+    if (sum & 1)
         return false;
 
     return 0;
@@ -103,5 +103,50 @@ int solutions::maxSubArray(vector<int> &nums) {
         return maxSum;
     else
         return maxEle;
+}
+
+int solutions::arrangeCoins(int n) {
+    int sum = 0, i;
+    for (i = 1; i < n; ++i) {
+        sum += i;
+        if (sum == n)
+            return i;
+        if (sum > n)
+            return i - 1;
+    }
+    return 0;
+}
+
+string solutions::three(int num) {
+    string result;
+    // 三位数
+    vector<string> gSome{"", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"};
+    vector<string> tenSome{"Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen",
+                           "Seventeen", "Eighteen", "Nineteen"};
+    vector<string> tens{"", "Twenty", "Thirty", "Forty", "Fifty",
+                        "Sixty", "Seventy", "Eighty", "Ninety"};
+    int h = num / 100;        // 百
+    int tg = num % 100;
+    int t = num % 100 / 10;     // 十
+    int g = num % 100 % 10;     // 个
+    if (h)
+        result += (gSome[h] + " Hundred ");
+    if (tg < 20 && tg > 9) {
+        result += (tenSome[tg - 10]);
+        return result;
+    } else {
+        if (t)
+            result += (tens[t] + " " + gSome[g]);
+    }
+    return result;
+}
+
+string solutions::numberToWords(int num) {
+//    "Two Billion One Hundred Forty Seven Million Four Hundred Eighty Three Thousand Six Hundred Forty Seven"
+    vector<string> name{"Thousand", "Million", "Billion"};
+    vector<string> ten{"Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen",
+                       "Seventeen", "Eighteen", "Nineteen", "Twenty", "Thirty", "Forty", "Fifty",
+                       "Sixty", "Seventy", "Eighty", "Ninety"};
+    return name[0];
 }
 
