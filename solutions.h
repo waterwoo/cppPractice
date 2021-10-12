@@ -19,6 +19,8 @@ public:
     int arrangeCoins(int n);
     static std::string three(int num);
     std::string numberToWords(int num);
+    int divide(int dividend, int divisor);
+
 
 };
 

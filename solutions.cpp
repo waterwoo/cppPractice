@@ -85,30 +85,30 @@ int solutions::lastStoneWeightII(vector<int> &stones) {
     // 偶数和1位与运算,结果为0
 //    if (sum & 1)
 //        return 0;
-    int target=(sum+(sum&1))/2;
+    int target = sum / 2;
+    cout << "SUM: " << sum << "*** target: " << target << "**N: " << n << endl;
 
-    vector<vector<int>> dp(n, vector<int> (target+1));
-//    for (int i = 0; i < n; ++i) {
-//        dp[i][0]=0;
-//    }
-    for (int i = stones[0]; i < target+1; ++i) {
-        dp[0][i]=stones[0];
+
+    vector<vector<int>> dp(n, vector<int>(target + 1));
+
+    for (int i = stones[0]; i < target + 1; ++i) {
+        dp[0][i] = stones[0];
     }
     for (int i = 1; i < n; ++i) {
-        for (int j = 1; j < target+1; ++j) {
-            if (dp[i-1][j]+stones[i]<=j)
-                dp[i][j] = dp[i-1][j]+stones[i];
-            else dp[i][j] = dp[i-1][j];
+        for (int j = 1; j < target + 1; ++j) {
+            if (stones[i] <= j)
+                dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - stones[i]] + stones[i]);
+            else dp[i][j] = dp[i - 1][j];
         }
     }
     for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < target+1; ++j) {
+        for (int j = 0; j < target + 1; ++j) {
             cout << dp[i][j] << "\t";
         }
         cout << endl;
     }
 
-    return sum-2*dp[n-1][target];
+    return sum - 2 * dp[n - 1][target];
 }
 
 int solutions::maxSubArray(vector<int> &nums) {
@@ -182,7 +182,7 @@ string solutions::numberToWords(int num) {
     int i = 0;
     while (num / 1000) {
         if (!three(num % 1000).empty())
-            result = (three(num % 1000) + " " + name[i] + " ").append(result) ;
+            result = (three(num % 1000) + " " + name[i] + " ").append(result);
         ++i;
         num /= 1000;
     }
@@ -190,6 +190,33 @@ string solutions::numberToWords(int num) {
         result = (three(num % 1000) + " " + name[i++] + " ").append(result);
     auto l = result.size();
     if (result.back() == ' ')
-        return result.substr(0,l-1);
+        return result.substr(0, l - 1);
     return result;
+}
+
+int solutions::divide(int dividend, int divisor) {
+    if (dividend == INT_MIN && divisor == -1)
+        return INT_MAX;
+    if (divisor == 1)
+        return dividend;
+
+    bool flag = true;
+    if ((dividend > 0 && divisor < 0) || (dividend < 0 && divisor > 0))
+        flag = false;
+    if (dividend > 0) dividend = -dividend;
+    if (divisor > 0) divisor = -divisor;
+
+    int ans = 0;
+    while (1) {
+        int a = dividend, b = divisor, cnt = 1;
+        if (a > b) break;
+        while (a - b <= b) {
+            cnt += cnt;
+            b += b;
+        }
+        ans += cnt;
+        dividend -= b;
+    }
+    return flag ? ans : -ans;
+
 }

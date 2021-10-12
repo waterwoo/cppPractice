@@ -10,10 +10,11 @@ using namespace std;
 
 
 int main() {
-    vector<int> nums{31,26,33,21,40};
-solutions sl;
-//int num=123;
-    auto result = sl.lastStoneWeightII(nums);
-    cout<< result << endl;
+//    vector<int> nums{14,1,7,17,8,10};
+    solutions sl;
+int t=-122,n=300;
+
+    auto result = sl.divide(t,n);
+    cout<< result << "  "<<pow(2,10)<< endl;
     return 0;
 }
