@@ -10,10 +10,10 @@ using namespace std;
 
 
 int main() {
-//    vector<int> nums{-2};
+    vector<int> nums{31,26,33,21,40};
 solutions sl;
-int num=123;
-    string result = sl.three(num);
+//int num=123;
+    auto result = sl.lastStoneWeightII(nums);
     cout<< result << endl;
     return 0;
 }

@@ -81,11 +81,34 @@ bool solutions::canPartition(std::vector<int> &nums) {
 
 int solutions::lastStoneWeightII(vector<int> &stones) {
     int sum = accumulate(stones.begin(), stones.end(), 0);
+    auto n = stones.size();
     // 偶数和1位与运算,结果为0
-    if (sum & 1)
-        return false;
+//    if (sum & 1)
+//        return 0;
+    int target=(sum+(sum&1))/2;
 
-    return 0;
+    vector<vector<int>> dp(n, vector<int> (target+1));
+//    for (int i = 0; i < n; ++i) {
+//        dp[i][0]=0;
+//    }
+    for (int i = stones[0]; i < target+1; ++i) {
+        dp[0][i]=stones[0];
+    }
+    for (int i = 1; i < n; ++i) {
+        for (int j = 1; j < target+1; ++j) {
+            if (dp[i-1][j]+stones[i]<=j)
+                dp[i][j] = dp[i-1][j]+stones[i];
+            else dp[i][j] = dp[i-1][j];
+        }
+    }
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < target+1; ++j) {
+            cout << dp[i][j] << "\t";
+        }
+        cout << endl;
+    }
+
+    return sum-2*dp[n-1][target];
 }
 
 int solutions::maxSubArray(vector<int> &nums) {
@@ -117,14 +140,16 @@ int solutions::arrangeCoins(int n) {
     return 0;
 }
 
+
 string solutions::three(int num) {
     string result;
     // 三位数
-    vector<string> gSome{"", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"};
+    vector<string> gSome{"Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"};
     vector<string> tenSome{"Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen",
                            "Seventeen", "Eighteen", "Nineteen"};
-    vector<string> tens{"", "Twenty", "Thirty", "Forty", "Fifty",
+    vector<string> tens{"", "", "Twenty", "Thirty", "Forty", "Fifty",
                         "Sixty", "Seventy", "Eighty", "Ninety"};
+
     int h = num / 100;        // 百
     int tg = num % 100;
     int t = num % 100 / 10;     // 十
@@ -136,17 +161,35 @@ string solutions::three(int num) {
         return result;
     } else {
         if (t)
-            result += (tens[t] + " " + gSome[g]);
+            result += (tens[t] + " ");
+        if (g)
+            result += (gSome[g]);
     }
+    auto l = result.size();
+    if (result.back() == ' ')
+        result.erase(l - 1, 1);
     return result;
 }
 
 string solutions::numberToWords(int num) {
-//    "Two Billion One Hundred Forty Seven Million Four Hundred Eighty Three Thousand Six Hundred Forty Seven"
-    vector<string> name{"Thousand", "Million", "Billion"};
-    vector<string> ten{"Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen",
-                       "Seventeen", "Eighteen", "Nineteen", "Twenty", "Thirty", "Forty", "Fifty",
-                       "Sixty", "Seventy", "Eighty", "Ninety"};
-    return name[0];
-}
 
+    if (num == 0)
+        return "Zero";
+
+    vector<string> name{"Thousand", "Million", "Billion"};
+    string result = three(num % 1000);
+    num /= 1000;
+    int i = 0;
+    while (num / 1000) {
+        if (!three(num % 1000).empty())
+            result = (three(num % 1000) + " " + name[i] + " ").append(result) ;
+        ++i;
+        num /= 1000;
+    }
+    if (!three(num % 1000).empty())
+        result = (three(num % 1000) + " " + name[i++] + " ").append(result);
+    auto l = result.size();
+    if (result.back() == ' ')
+        return result.substr(0,l-1);
+    return result;
+}

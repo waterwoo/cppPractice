@@ -17,7 +17,7 @@ public:
     int lastStoneWeightII(std::vector<int>& stones);
     int maxSubArray(std::vector<int>& nums);
     int arrangeCoins(int n);
-    std::string three(int num);
+    static std::string three(int num);
     std::string numberToWords(int num);
 
 };
