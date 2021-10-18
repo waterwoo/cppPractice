@@ -20,9 +20,17 @@ public:
     static std::string three(int num);
     std::string numberToWords(int num);
     int divide(int dividend, int divisor);
+    std::vector<std::string> fizzBuzz(int n);
+    int findTargetSumWays(std::vector<int>& nums, int target);
+    std::string countAndSay(int n);
+    std::vector<std::string> readBinaryWatch(int turnedOn);
+    int findComplement(int num);
+    bool areNumbersAscending(std::string s);
 
-
+    static bool cmp(const int &a, const int &b);
 };
+
+int count1(int n);
 
 
 #endif //CPPPRACTICE_SOLUTIONS_H

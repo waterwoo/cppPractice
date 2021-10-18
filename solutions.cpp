@@ -220,3 +220,149 @@ int solutions::divide(int dividend, int divisor) {
     return flag ? ans : -ans;
 
 }
+
+vector<string> solutions::fizzBuzz(int n) {
+//    vector<string> result;
+//    for (int i = 1; i <= n; ++i) {
+//        if (i%3 && i%5)
+//            result.emplace_back(to_string(i));
+//        else if(i%15==0)
+//            result.emplace_back("FizzBuzz");
+//        else if (i%3==0)
+//            result.emplace_back("Fizz");
+//        else
+//            result.emplace_back("Buzz");
+//    }
+//    return result;
+    vector<string> result;
+    for (int i = 1; i <= n; ++i) {
+        if (i % 3 && i % 5)
+            result.emplace_back(to_string(i));
+        else if (i % 15 == 0)
+            result.emplace_back("FizzBuzz");
+        else if (i % 3 == 0)
+            result.emplace_back("Fizz");
+        else
+            result.emplace_back("Buzz");
+    }
+    return result;
+}
+
+int solutions::findTargetSumWays(vector<int> &nums, int target) {
+    int n = nums.size();
+    int sum = accumulate(nums.begin(), nums.end(), 0);
+    if ((sum - target) & 1)
+        return 0;
+    int left = (sum - target) / 2;
+
+    cout << left << endl;
+
+    vector<vector<int>> dp(n + 1, vector<int>(left + 1));
+
+    dp[0][0] = 1;
+//    for (int i = 0; i < n; ++i) {
+//        dp[i][0] = 1;
+//    }
+
+    for (int i = 1; i <= n; ++i) {
+        for (int j = 0; j <= left; ++j) {
+            dp[i][j] += dp[i - 1][j];
+            if (j >= nums[i - 1])
+                dp[i][j] += dp[i - 1][j - nums[i - 1]];
+        }
+    }
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j <= left; ++j) {
+            cout << dp[i][j] << "\t";
+        }
+        cout << endl;
+    }
+    return dp[n][left];
+}
+
+std::string solutions::countAndSay(int n) {
+    if (n == 1)
+        return "1";
+    string s = "1";
+    int nx;
+    string thisResult;
+    // 进行n次迭代
+    for (int i = 0; i < n - 1; ++i) {
+        nx = 0;
+        char tmp = s[0];
+        thisResult = "";
+        // 对每一个字符串:
+        for (int j = 0; j < s.size(); j++) {
+            if (tmp != s[j]) {
+                thisResult.append(to_string(nx) + s[j - 1]);
+                tmp = s[j];
+                nx = 0;
+            }
+            nx++;
+        }
+        thisResult.append(to_string(nx) + tmp);
+        s = thisResult;
+    }
+    return thisResult;
+}
+
+std::vector<std::string> solutions::readBinaryWatch(int turnedOn) {
+    vector<string> result;
+    for (int i = 0; i < 12; ++i) {
+        for (int j = 0; j < 60; ++j) {
+            if ((count1(i) + count1(j)) == turnedOn)
+                result.push_back(to_string(i) + ":" + (j < 10 ? "0" + to_string(j) : to_string(j)));
+        }
+    }
+
+    return result;
+
+}
+
+int count1(int n) {
+    int res = 0;
+    while (n != 0) {
+        n = n & (n - 1);
+        res++;
+    }
+    return res;
+}
+
+int solutions::findComplement(int num) {
+    // 找到最高位的1，左移一位并-1，异或
+    int highBit = 1;
+    int x = num;
+    while (x != 0) {
+        // 找最低位（最右边）的 1
+        highBit = x & (-x);
+        // 打掉最低位（最右边）的1
+        x = x & (x - 1);
+    }
+    long xm = ((highBit << 1) - 1);
+    return num ^ xm;
+}
+
+bool solutions::areNumbersAscending(std::string s) {
+    vector<int> nums;
+    for (int i = 0; i < s.size(); ++i) {
+        if (isdigit(s[i])) {
+            int n = (s[i] - '0');
+            int j = i + 1;
+            for (j; j < s.size(); ++j) {
+                if (isdigit(s[j]))
+                    n = (n * 10 + (s[j] - '0'));
+                else break;
+            }
+            nums.push_back(n);
+            i = j;
+        }
+    }
+    if (std::is_sorted(nums.begin(), nums.end(), cmp))
+        return true;
+    else
+        return false;
+}
+
+bool solutions::cmp(const int &a, const int &b) {
+    return a <= b;
+}
