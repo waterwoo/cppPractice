@@ -1,18 +1,23 @@
 #include <iostream>
 #include <string>
 #include "licenseKeyFormatting.h"
-#include <time.h>
+//#include <time.h>
 #include <vector>
 #include "solutions.h"
-#include <math.h>
+//#include <math.h>
+#include "myFirstQueue.h"
+#include "MyCircularQueue.h"
+
 
 using namespace std;
 
 
 int main() {
     solutions sl;
-    std::string s="this 1 4 fjld 42 89 89 jsf";
-    auto result = sl.areNumbersAscending(s);
-    cout << result << endl;
+    string s="()()((";
+
+    auto result = sl.removeInvalidParentheses(s);
+        cout<< result[0] <<endl;
+
     return 0;
 }

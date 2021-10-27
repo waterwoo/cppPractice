@@ -366,3 +366,180 @@ bool solutions::areNumbersAscending(std::string s) {
 bool solutions::cmp(const int &a, const int &b) {
     return a <= b;
 }
+
+std::vector<int> solutions::plusOne(vector<int> &digits) {
+    if (digits[0]==0)
+        return vector<int>{1};
+    if (digits.size()==1 && digits[0]==9){
+        return vector<int> {1,0};
+    }
+    if (digits.back()!=9){
+        digits.back()++;
+        return digits;
+    } else {
+        digits.back()=0;
+        vector<int> ar(digits.begin(), digits.end()-1);
+        auto re = plusOne(ar);
+        re.push_back(0);
+        return re;
+    }
+}
+
+std::vector<int> solutions::majorityElement(vector<int> &nums) {
+    vector<int> result;
+    int n = nums.size();
+    std::sort(nums.begin(), nums.end());
+    int count=1;
+    for (int i = 1; i < n; ++i) {
+        if (nums[i]==nums[i-1]){
+            count++;
+        } else {
+            if (count>(n/3))
+                result.emplace_back(nums[i-1]);
+            count=1;
+        }
+    }
+    if (count>(n/3))
+        result.emplace_back(nums.back());
+    return result;
+}
+
+std::vector<int> solutions::majorityElementHash(vector<int> &nums) {
+    int n = nums.size();
+    vector<int> ans;
+    unordered_map<int, int> cnt;
+
+    for (auto & v : nums) {
+        cnt[v]++;
+    }
+    for (auto & v : cnt) {
+        if (v.second > n / 3) {
+            ans.push_back(v.first);
+        }
+    }
+    return ans;
+}
+
+bool solutions::searchMatrix(vector<vector<int>> &matrix, int target) {
+    // 先左右后上下
+    int m=matrix.size(),n=matrix[0].size();
+    int mid;
+    for (int i = 0; i < m; ++i) {
+        int left=0, right=n-1;
+        while(left<=right){
+            mid=(right+left)/2;
+            if (matrix[i][mid]<target){
+                left=mid+1;
+            } else
+            if (matrix[i][mid]>target){
+                right=mid-1;
+            } else{
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+vector<int> solutions::nextGreaterElement(vector<int> &nums1, vector<int> &nums2) {
+    int mm=nums1.size();
+    vector<int> ans(mm,-1);
+    for (int i=0;i<mm;i++) {
+        auto m=find(nums2.begin(), nums2.end(), nums1[i]);
+        for (; m != nums2.end(); m++) {
+            if (*m>nums1[i]){
+                ans[i]=*m;
+                break;
+            }
+        }
+    }
+    return ans;
+//    int m = nums1.size();
+//    int n = nums2.size();
+//    vector<int> res(m);
+//    for (int i = 0; i < m; ++i) {
+//        int j = 0;
+//        while (j < n && nums2[j] != nums1[i]) {
+//            ++j;
+//        }
+//        int k = j + 1;
+//        while (k < n && nums2[k] < nums2[j]) {
+//            ++k;
+//        }
+//        res[i] = k < n ? nums2[k] : -1;
+//    }
+//    return res;
+
+}
+
+bool solutions::isValid(string s) {
+    stack<int> stk;
+    for (auto ch: s) {
+        if (!stk.empty()){
+            switch (ch) {
+                case '(':
+                case '{':
+                case '[':
+                    stk.push(ch);
+                    break;
+                case ')':
+                    if (stk.top()=='(')
+                        stk.pop();
+                    else stk.push(ch);
+                    break;
+                case ']':
+                    if (stk.top()=='[')
+                        stk.pop();
+                    else stk.push(ch);
+                    break;
+                case '}':
+                    if (stk.top()=='{')
+                        stk.pop();
+                    else stk.push(ch);
+                    break;
+                default:
+                    break;
+            }
+        } else
+            stk.push(ch);
+    }
+    if (stk.empty())
+        return true;
+    else
+        return false;
+}
+
+struct node{
+    int pos;
+    char val;
+};
+vector<string> solutions::removeInvalidParentheses(string s) {
+    auto ss=s;
+    stack<node> stk;
+    for (int i=0;i<s.size();++i) {
+        if (!stk.empty()){
+            switch (s[i]) {
+                case '(':
+                    stk.push({i, s[i]});
+                    break;
+                case ')':
+                    if (stk.top().val=='(')
+                        stk.pop();
+                    else
+                        stk.push({i, s[i]});
+                    break;
+                default:
+                    break;
+            }
+        } else
+            stk.push({i, s[i]});
+    }
+    while (!stk.empty()){
+        ss.erase(stk.top().pos);
+        stk.pop();
+    }
+    vector<string> result;
+    result.emplace_back(ss);
+    return result;
+}

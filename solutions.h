@@ -7,7 +7,10 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <stack>
+#include <unordered_map>
 
+using namespace std;
 class solutions {
 public:
     int thirdMax(std::vector<int>& nums);
@@ -28,6 +31,14 @@ public:
     bool areNumbersAscending(std::string s);
 
     static bool cmp(const int &a, const int &b);
+    std::vector<int> plusOne(std::vector<int>& digits);
+    std::vector<int> majorityElement(std::vector<int>& nums);
+    std::vector<int> majorityElementHash(std::vector<int>& nums);
+    bool searchMatrix(vector<vector<int>>& matrix, int target);
+    vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2);
+    bool isValid(string s);
+    vector<string> removeInvalidParentheses(string s);
+
 };
 
 int count1(int n);
