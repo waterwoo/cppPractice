@@ -14,10 +14,14 @@ using namespace std;
 
 int main() {
     solutions sl;
-    string s="()()((";
 
-    auto result = sl.removeInvalidParentheses(s);
-        cout<< result[0] <<endl;
+    vector<int> nums{0,1,0,2,1,0,1,3,2,1,2,1};
+
+    auto result = sl.trap(nums);
+//    for (auto w:result) {
+//        cout<< w <<"**";
+//    }
+    cout<< result <<endl;
 
     return 0;
 }

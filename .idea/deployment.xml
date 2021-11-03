@@ -2,12 +2,14 @@
 <project version="4">
   <component name="PublishConfigData" remoteFilesAllowedToDisappearOnAutoupload="false">
     <serverData>
-      <paths name="远程主机 (2536d59b-7dde-4026-928d-74b43215c794)">
+      <paths name="RaspberryPi (2536d59b-7dde-4026-928d-74b43215c794)">
         <serverdata>
           <mappings>
             <mapping deploy="/tmp/tmp.XUUpyloP9g" local="$PROJECT_DIR$" />
           </mappings>
           <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug" />
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug-" />
             <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug" />
           </excludedPaths>
         </serverdata>

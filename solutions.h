@@ -9,6 +9,7 @@
 #include <iostream>
 #include <stack>
 #include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 class solutions {
@@ -29,7 +30,6 @@ public:
     std::vector<std::string> readBinaryWatch(int turnedOn);
     int findComplement(int num);
     bool areNumbersAscending(std::string s);
-
     static bool cmp(const int &a, const int &b);
     std::vector<int> plusOne(std::vector<int>& digits);
     std::vector<int> majorityElement(std::vector<int>& nums);
@@ -38,6 +38,12 @@ public:
     vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2);
     bool isValid(string s);
     vector<string> removeInvalidParentheses(string s);
+    bool reorderedPowerOf2(int n);
+    bool isSelfCrossing(vector<int>& distance);
+    static vector<string> findWords(vector<string>& words);
+    int distributeCandies(vector<int>& candyType);
+    int maxArea(vector<int>& height);
+    int trap(vector<int>& height);
 
 };
 

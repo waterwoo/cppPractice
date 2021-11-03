@@ -195,8 +195,8 @@ string solutions::numberToWords(int num) {
 }
 
 int solutions::divide(int dividend, int divisor) {
-    if (dividend == INT_MIN && divisor == -1)
-        return INT_MAX;
+    if (dividend == INT32_MIN && divisor == -1)
+        return INT32_MIN;
     if (divisor == 1)
         return dividend;
 
@@ -368,17 +368,17 @@ bool solutions::cmp(const int &a, const int &b) {
 }
 
 std::vector<int> solutions::plusOne(vector<int> &digits) {
-    if (digits[0]==0)
+    if (digits[0] == 0)
         return vector<int>{1};
-    if (digits.size()==1 && digits[0]==9){
-        return vector<int> {1,0};
+    if (digits.size() == 1 && digits[0] == 9) {
+        return vector<int>{1, 0};
     }
-    if (digits.back()!=9){
+    if (digits.back() != 9) {
         digits.back()++;
         return digits;
     } else {
-        digits.back()=0;
-        vector<int> ar(digits.begin(), digits.end()-1);
+        digits.back() = 0;
+        vector<int> ar(digits.begin(), digits.end() - 1);
         auto re = plusOne(ar);
         re.push_back(0);
         return re;
@@ -389,17 +389,17 @@ std::vector<int> solutions::majorityElement(vector<int> &nums) {
     vector<int> result;
     int n = nums.size();
     std::sort(nums.begin(), nums.end());
-    int count=1;
+    int count = 1;
     for (int i = 1; i < n; ++i) {
-        if (nums[i]==nums[i-1]){
+        if (nums[i] == nums[i - 1]) {
             count++;
         } else {
-            if (count>(n/3))
-                result.emplace_back(nums[i-1]);
-            count=1;
+            if (count > (n / 3))
+                result.emplace_back(nums[i - 1]);
+            count = 1;
         }
     }
-    if (count>(n/3))
+    if (count > (n / 3))
         result.emplace_back(nums.back());
     return result;
 }
@@ -409,10 +409,10 @@ std::vector<int> solutions::majorityElementHash(vector<int> &nums) {
     vector<int> ans;
     unordered_map<int, int> cnt;
 
-    for (auto & v : nums) {
+    for (auto &v: nums) {
         cnt[v]++;
     }
-    for (auto & v : cnt) {
+    for (auto &v: cnt) {
         if (v.second > n / 3) {
             ans.push_back(v.first);
         }
@@ -422,18 +422,17 @@ std::vector<int> solutions::majorityElementHash(vector<int> &nums) {
 
 bool solutions::searchMatrix(vector<vector<int>> &matrix, int target) {
     // 先左右后上下
-    int m=matrix.size(),n=matrix[0].size();
+    int m = matrix.size(), n = matrix[0].size();
     int mid;
     for (int i = 0; i < m; ++i) {
-        int left=0, right=n-1;
-        while(left<=right){
-            mid=(right+left)/2;
-            if (matrix[i][mid]<target){
-                left=mid+1;
-            } else
-            if (matrix[i][mid]>target){
-                right=mid-1;
-            } else{
+        int left = 0, right = n - 1;
+        while (left <= right) {
+            mid = (right + left) / 2;
+            if (matrix[i][mid] < target) {
+                left = mid + 1;
+            } else if (matrix[i][mid] > target) {
+                right = mid - 1;
+            } else {
                 return true;
             }
         }
@@ -443,13 +442,13 @@ bool solutions::searchMatrix(vector<vector<int>> &matrix, int target) {
 }
 
 vector<int> solutions::nextGreaterElement(vector<int> &nums1, vector<int> &nums2) {
-    int mm=nums1.size();
-    vector<int> ans(mm,-1);
-    for (int i=0;i<mm;i++) {
-        auto m=find(nums2.begin(), nums2.end(), nums1[i]);
+    int mm = nums1.size();
+    vector<int> ans(mm, -1);
+    for (int i = 0; i < mm; i++) {
+        auto m = find(nums2.begin(), nums2.end(), nums1[i]);
         for (; m != nums2.end(); m++) {
-            if (*m>nums1[i]){
-                ans[i]=*m;
+            if (*m > nums1[i]) {
+                ans[i] = *m;
                 break;
             }
         }
@@ -476,7 +475,7 @@ vector<int> solutions::nextGreaterElement(vector<int> &nums1, vector<int> &nums2
 bool solutions::isValid(string s) {
     stack<int> stk;
     for (auto ch: s) {
-        if (!stk.empty()){
+        if (!stk.empty()) {
             switch (ch) {
                 case '(':
                 case '{':
@@ -484,17 +483,17 @@ bool solutions::isValid(string s) {
                     stk.push(ch);
                     break;
                 case ')':
-                    if (stk.top()=='(')
+                    if (stk.top() == '(')
                         stk.pop();
                     else stk.push(ch);
                     break;
                 case ']':
-                    if (stk.top()=='[')
+                    if (stk.top() == '[')
                         stk.pop();
                     else stk.push(ch);
                     break;
                 case '}':
-                    if (stk.top()=='{')
+                    if (stk.top() == '{')
                         stk.pop();
                     else stk.push(ch);
                     break;
@@ -510,21 +509,22 @@ bool solutions::isValid(string s) {
         return false;
 }
 
-struct node{
+struct node {
     int pos;
     char val;
 };
+
 vector<string> solutions::removeInvalidParentheses(string s) {
-    auto ss=s;
+    auto ss = s, sss = s;
     stack<node> stk;
-    for (int i=0;i<s.size();++i) {
-        if (!stk.empty()){
+    for (int i = 0; i < s.size(); ++i) {
+        if (!stk.empty()) {
             switch (s[i]) {
                 case '(':
                     stk.push({i, s[i]});
                     break;
                 case ')':
-                    if (stk.top().val=='(')
+                    if (stk.top().val == '(')
                         stk.pop();
                     else
                         stk.push({i, s[i]});
@@ -535,11 +535,136 @@ vector<string> solutions::removeInvalidParentheses(string s) {
         } else
             stk.push({i, s[i]});
     }
-    while (!stk.empty()){
-        ss.erase(stk.top().pos);
+    while (!stk.empty()) {
+//        cout << stk.top().pos;
+        ss.erase(stk.top().pos, 1);
         stk.pop();
     }
     vector<string> result;
     result.emplace_back(ss);
+
+
+    for (int i = s.size() - 1; i != -1; --i) {
+        if (!stk.empty()) {
+            switch (s[i]) {
+                case '(':
+                    stk.push({i, s[i]});
+                    break;
+                case ')':
+                    if (stk.top().val == '(')
+                        stk.pop();
+                    else
+                        stk.push({i, s[i]});
+                    break;
+                default:
+                    break;
+            }
+        } else
+            stk.push({i, s[i]});
+    }
+    while (!stk.empty()) {
+//        cout << stk.top().pos;
+        sss.erase(stk.top().pos, 1);
+        stk.pop();
+    }
+//    vector<string> result;
+    result.emplace_back(sss);
     return result;
+}
+
+bool solutions::reorderedPowerOf2(int n) {
+    vector<string> uset = {"1", "2", "4", "8", "16", "23", "46", "128", "256", "125", "0124", "0248", "0469", "1289",
+                           "13468", "23678", "35566", "011237", "122446", "224588", "0145678", "0122579", "0134449",
+                           "0368888", "11266777", "23334455", "01466788", "112234778", "234455668", "012356789",
+                           "0112344778"};
+    auto s = to_string(n);
+    sort(s.begin(), s.end());
+    return count(uset.begin(), uset.end(), s);
+}
+
+bool solutions::isSelfCrossing(vector<int> &distance) {
+    int n = distance.size();
+    if (n < 3)
+        return false;
+    for (int i = 3; i < n; i++) {
+        if (distance[i] >= distance[i - 2] && distance[i - 1] <= distance[i - 3])
+            return true;
+        if (i == 4 && distance[3] == distance[1] && distance[2] >= (distance[4] + distance[0]))
+            return true;
+        if (i > 4 &&
+            distance[i - 3] <= (distance[i - 1] + distance[i - 5]) &&
+            distance[i - 1] <= distance[i - 3] &&
+            distance[i] >= (distance[i - 2] - distance[i - 4]) &&
+            distance[i - 2] > distance[i - 4])
+            return true;
+    }
+    return false;
+}
+
+vector<string> solutions::findWords(vector<string> &words) {
+    string letters(26, '0');
+//string letters="12210111011122000010020202";
+    for (auto l: string("asdfghjkl"))
+        letters[l - 'a'] = '1';
+    for (auto l: string("zxcvbnm"))
+        letters[l - 'a'] = '2';
+
+    vector<string> ans;
+    for (auto &word: words) {
+        char x = letters[tolower(word[0]) - 'a'];
+        int isValid = 1;
+        for (auto l: word) {
+            if (letters[tolower(l) - 'a'] != x) {
+                isValid = 0;
+                break;
+            }
+        }
+        if (isValid)
+            ans.emplace_back(word);
+    }
+    return ans;
+}
+
+int solutions::distributeCandies(vector<int> &candyType) {
+//    unordered_map<int, int> Hash;
+    return min(unordered_set<int>(candyType.begin(), candyType.end()).size(), candyType.size() / 2);
+
+    return 0;
+}
+
+int solutions::maxArea(vector<int> &height) {
+    int maxArea = 0;
+    int left = 0, right = height.size() - 1;
+    while (left < right) {
+        maxArea = max(maxArea, min(height[left], height[right]) * (right - left));
+        if (height[left] < height[right])
+            ++left;
+        else
+            --right;
+    }
+    return maxArea;
+}
+
+int solutions::trap(vector<int> &height) {
+    // 1. dp
+    int n = height.size();
+    if (n < 3)
+        return 0;
+    vector<int> leftMax(n, 0), rightMax(n, 0);
+//    leftMax[0]=0;
+//    rightMax[n-1]=0;
+    for (int i = 1; i < n; ++i) {
+        // update leftMax
+        leftMax[i] = height[i - 1] > leftMax[i - 1] ? height[i - 1] : leftMax[i - 1];
+        // update rightMax
+        rightMax[n - i - 1] = height[n - i] > rightMax[n - i] ? height[n - i] : rightMax[n - i];
+    }
+
+    int ans = 0;
+    for (int i = 0; i < n; ++i) {
+        int sub = (leftMax[i] < rightMax[i] ? leftMax[i] : rightMax[i]);
+        if (sub > height[i])
+            ans += (sub - height[i]);
+    }
+    return ans;
 }
