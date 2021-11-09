@@ -44,7 +44,11 @@ public:
     int distributeCandies(vector<int>& candyType);
     int maxArea(vector<int>& height);
     int trap(vector<int>& height);
-
+    int longestSubsequence(vector<int>& arr, int difference);
+    int missingNumber(vector<int>& nums);
+    int maxCount(int m, int n, vector<vector<int>>& ops);
+    string getHint(string secret, string guess);
+    int findPoisonedDuration(vector<int>& timeSeries, int duration);
 };
 
 int count1(int n);

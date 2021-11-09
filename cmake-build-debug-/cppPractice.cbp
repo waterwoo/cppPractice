@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="cppPractice"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/tmp/tmp.XUUpyloP9g/cmake-build-debug-"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/tmp/tmp.XUUpyloP9g/cmake-build-debug-/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/tmp/tmp.XUUpyloP9g/cmake-build-debug-/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/tmp/tmp.XUUpyloP9g/cmake-build-debug-/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/tmp/tmp.XUUpyloP9g/cmake-build-debug-/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/tmp/tmp.XUUpyloP9g/cmake-build-debug-"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/tmp/tmp.XUUpyloP9g/cmake-build-debug-/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/tmp/tmp.XUUpyloP9g/cmake-build-debug-/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/tmp/tmp.XUUpyloP9g/cmake-build-debug-/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/tmp/tmp.XUUpyloP9g/cmake-build-debug-/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/tmp/tmp.XUUpyloP9g/cmake-build-debug-"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/tmp/tmp.XUUpyloP9g/cmake-build-debug-/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/tmp/tmp.XUUpyloP9g/cmake-build-debug-/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/tmp/tmp.XUUpyloP9g/cmake-build-debug-/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/tmp/tmp.XUUpyloP9g/cmake-build-debug-/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="cppPractice">
+				<Option output="/tmp/tmp.XUUpyloP9g/cmake-build-debug-/cppPractice" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/tmp/tmp.XUUpyloP9g/cmake-build-debug-"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/aarch64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/aarch64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/aarch64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/tmp/tmp.XUUpyloP9g/cmake-build-debug-/Makefile&quot;  VERBOSE=1 cppPractice"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/tmp/tmp.XUUpyloP9g/cmake-build-debug-/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/tmp/tmp.XUUpyloP9g/cmake-build-debug-/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/tmp/tmp.XUUpyloP9g/cmake-build-debug-/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="cppPractice/fast">
+				<Option output="/tmp/tmp.XUUpyloP9g/cmake-build-debug-/cppPractice" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/tmp/tmp.XUUpyloP9g/cmake-build-debug-"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/aarch64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/aarch64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/aarch64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/tmp/tmp.XUUpyloP9g/cmake-build-debug-/Makefile&quot;  VERBOSE=1 cppPractice/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/tmp/tmp.XUUpyloP9g/cmake-build-debug-/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/tmp/tmp.XUUpyloP9g/cmake-build-debug-/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/tmp/tmp.XUUpyloP9g/cmake-build-debug-/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/tmp/tmp.XUUpyloP9g/MyCircularQueue.cpp">
+			<Option target="cppPractice"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.XUUpyloP9g/MyCircularQueue.h">
+			<Option target="cppPractice"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.XUUpyloP9g/binaryTreeNode.cpp">
+			<Option target="cppPractice"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.XUUpyloP9g/binaryTreeNode.h">
+			<Option target="cppPractice"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.XUUpyloP9g/climbStairs.cpp">
+			<Option target="cppPractice"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.XUUpyloP9g/climbStairs.h">
+			<Option target="cppPractice"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.XUUpyloP9g/licenseKeyFormatting.cpp">
+			<Option target="cppPractice"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.XUUpyloP9g/licenseKeyFormatting.h">
+			<Option target="cppPractice"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.XUUpyloP9g/main.cpp">
+			<Option target="cppPractice"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.XUUpyloP9g/minCostClimbingStairs.cpp">
+			<Option target="cppPractice"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.XUUpyloP9g/minCostClimbingStairs.h">
+			<Option target="cppPractice"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.XUUpyloP9g/myFirstQueue.cpp">
+			<Option target="cppPractice"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.XUUpyloP9g/myFirstQueue.h">
+			<Option target="cppPractice"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.XUUpyloP9g/myFirstStack.cpp">
+			<Option target="cppPractice"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.XUUpyloP9g/myFirstStack.h">
+			<Option target="cppPractice"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.XUUpyloP9g/numDecodings.cpp">
+			<Option target="cppPractice"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.XUUpyloP9g/numDecodings.h">
+			<Option target="cppPractice"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.XUUpyloP9g/solutions.cpp">
+			<Option target="cppPractice"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.XUUpyloP9g/solutions.h">
+			<Option target="cppPractice"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.XUUpyloP9g/sumOfTwoInt.cpp">
+			<Option target="cppPractice"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.XUUpyloP9g/sumOfTwoInt.h">
+			<Option target="cppPractice"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.XUUpyloP9g/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

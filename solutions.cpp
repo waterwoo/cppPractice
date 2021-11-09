@@ -668,3 +668,72 @@ int solutions::trap(vector<int> &height) {
     }
     return ans;
 }
+
+
+int solutions::longestSubsequence(vector<int> &arr, int difference) {
+    int n=arr.size();
+    if (n==1)
+        return 1;
+    // 令 dp[i]表示以 arr[i] 为结尾的最长的等差子序列的长度
+
+}
+
+int solutions::missingNumber(vector<int> &nums) {
+//    int n=nums.size();
+//    unordered_set<int> miss;
+//    for (auto k:nums) {
+//        miss.insert(k);
+//    }
+//    for (int i = 0; i <= n; ++i) {
+//        if (miss.count(i)==0)
+//            return i;
+//    }
+//    return 0;
+    int n=nums.size();
+    int sum=0;
+    for (int k:nums) {
+        sum+=k;
+    }
+    return n*(n+1)/2-sum;
+}
+
+int solutions::maxCount(int m, int n, vector<vector<int>> &ops) {
+    int numOp = ops.size();
+    int minA = m, minB = n;
+    for (int i = 0; i < numOp; ++i) {
+        if (ops[i][0] < minA)
+            minA = ops[i][0];
+        if (ops[i][1] < minB)
+            minB = ops[i][1];
+    }
+    return minA * minB;
+}
+
+string solutions::getHint(string secret, string guess) {
+    int bulls = 0;
+    vector<int> cntS(10), cntG(10);
+    for (int i = 0; i < secret.length(); ++i) {
+        if (secret[i] == guess[i]) {
+            ++bulls;
+        } else {
+            ++cntS[secret[i] - '0'];
+            ++cntG[guess[i] - '0'];
+        }
+    }
+    int cows = 0;
+    for (int i = 0; i < 10; ++i) {
+        cows += min(cntS[i], cntG[i]);
+    }
+    return to_string(bulls) + "A" + to_string(cows) + "B";
+}
+
+int solutions::findPoisonedDuration(vector<int> &timeSeries, int duration) {
+    int n=timeSeries.size();
+    int ans = duration;
+    for (int i = 1; i < n; ++i) {
+        ans+=duration;
+        if (timeSeries[i]-timeSeries[i-1]<duration)
+            ans-=(duration-timeSeries[i]+timeSeries[i-1]);
+    }
+    return ans;
+}
