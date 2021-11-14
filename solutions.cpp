@@ -737,3 +737,39 @@ int solutions::findPoisonedDuration(vector<int> &timeSeries, int duration) {
     }
     return ans;
 }
+
+int solutions::getMoneyAmount(int n) {
+
+    vector<vector<int>> dp(n+1, vector<int>(n+1,0));
+    for (int i = n-1; i >= 1; --i) {
+        for (int j = i+1; j <= n; ++j) {
+            // 循环
+            int subMin=INT_MAX;
+            for (int k = i; k < j; k++) {
+                int con = k+max(dp[i][k-1], dp[k+1][j]);
+                if (con<subMin)
+                    subMin=k+max(dp[i][k-1], dp[k+1][j]);
+            }
+            dp[i][j]=subMin;
+            cout << i << "\t"<<j<<"\t"<<dp[i][j]<<endl;
+        }
+    }
+    return dp[1][n];
+}
+
+bool solutions::detectCapitalUse(string word) {
+    bool ans= true;
+    int length = word.size();
+    if (length==1)
+        return true;
+    for (auto c: word) {
+        ans *= isupper(c);
+    }
+    if (ans)
+        return ans;
+    for (int i = 1; i < length; ++i) {
+        if (isupper(word[i]))
+            return false;
+    }
+    return true;
+}

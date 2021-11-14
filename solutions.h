@@ -49,7 +49,10 @@ public:
     int maxCount(int m, int n, vector<vector<int>>& ops);
     string getHint(string secret, string guess);
     int findPoisonedDuration(vector<int>& timeSeries, int duration);
-};
+    int getMoneyAmount(int n) ;
+    bool detectCapitalUse(string word);
+
+    };
 
 int count1(int n);
 
