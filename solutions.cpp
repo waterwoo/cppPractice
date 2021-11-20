@@ -5,6 +5,7 @@
 #include "solutions.h"
 #include <algorithm>
 #include<numeric>
+#include <climits>
 
 using namespace std;
 
@@ -671,8 +672,8 @@ int solutions::trap(vector<int> &height) {
 
 
 int solutions::longestSubsequence(vector<int> &arr, int difference) {
-    int n=arr.size();
-    if (n==1)
+//    int n=arr.size();
+//    if (n==1)
         return 1;
     // 令 dp[i]表示以 arr[i] 为结尾的最长的等差子序列的长度
 
@@ -689,12 +690,12 @@ int solutions::missingNumber(vector<int> &nums) {
 //            return i;
 //    }
 //    return 0;
-    int n=nums.size();
-    int sum=0;
+    int n = nums.size();
+    int sum = 0;
     for (int k:nums) {
-        sum+=k;
+        sum += k;
     }
-    return n*(n+1)/2-sum;
+    return n * (n + 1) / 2 - sum;
 }
 
 int solutions::maxCount(int m, int n, vector<vector<int>> &ops) {
@@ -728,39 +729,39 @@ string solutions::getHint(string secret, string guess) {
 }
 
 int solutions::findPoisonedDuration(vector<int> &timeSeries, int duration) {
-    int n=timeSeries.size();
+    int n = timeSeries.size();
     int ans = duration;
     for (int i = 1; i < n; ++i) {
-        ans+=duration;
-        if (timeSeries[i]-timeSeries[i-1]<duration)
-            ans-=(duration-timeSeries[i]+timeSeries[i-1]);
+        ans += duration;
+        if (timeSeries[i] - timeSeries[i - 1] < duration)
+            ans -= (duration - timeSeries[i] + timeSeries[i - 1]);
     }
     return ans;
 }
 
 int solutions::getMoneyAmount(int n) {
 
-    vector<vector<int>> dp(n+1, vector<int>(n+1,0));
-    for (int i = n-1; i >= 1; --i) {
-        for (int j = i+1; j <= n; ++j) {
+    vector<vector<int>> dp(n + 1, vector<int>(n + 1, 0));
+    for (int i = n - 1; i >= 1; --i) {
+        for (int j = i + 1; j <= n; ++j) {
             // 循环
-            int subMin=INT_MAX;
+            int subMin = INT_MAX;
             for (int k = i; k < j; k++) {
-                int con = k+max(dp[i][k-1], dp[k+1][j]);
-                if (con<subMin)
-                    subMin=k+max(dp[i][k-1], dp[k+1][j]);
+                int con = k + max(dp[i][k - 1], dp[k + 1][j]);
+                if (con < subMin)
+                    subMin = k + max(dp[i][k - 1], dp[k + 1][j]);
             }
-            dp[i][j]=subMin;
-            cout << i << "\t"<<j<<"\t"<<dp[i][j]<<endl;
+            dp[i][j] = subMin;
+            cout << i << "\t" << j << "\t" << dp[i][j] << endl;
         }
     }
     return dp[1][n];
 }
 
 bool solutions::detectCapitalUse(string word) {
-    bool ans= true;
+    bool ans = true;
     int length = word.size();
-    if (length==1)
+    if (length == 1)
         return true;
     for (auto c: word) {
         ans *= isupper(c);
@@ -773,3 +774,107 @@ bool solutions::detectCapitalUse(string word) {
     }
     return true;
 }
+
+bool solutions::isRectangleCover(vector<vector<int>> &rectangles) {
+    typedef pair<int, int> Point;
+    // 找出大矩阵
+    int leftX = rectangles[0][0], leftY = rectangles[0][1], rightX = rectangles[0][2], rightY = rectangles[0][3];
+    int sumArea = 0;
+    map<Point, int> cnt;
+
+    for (auto s: rectangles) {
+        Point point1({s[0], s[1]});
+        Point point2({s[0], s[3]});
+        Point point3({s[2], s[1]});
+        Point point4({s[2], s[3]});
+        cnt[point1]++;
+        cnt[point2]++;
+        cnt[point3]++;
+        cnt[point4]++;
+
+        sumArea += (s[3] - s[1]) * (s[2] - s[0]);
+        cout<<sumArea<<endl;
+//        cnt.insert()
+        if (s[0] < leftX)
+            leftX = s[0];
+        if (s[1] < leftY)
+            leftY = s[1];
+        if (s[2] > rightX)
+            rightX = s[2];
+        if (s[3] > rightY)
+            rightY = s[3];
+    }
+    Point point11({leftX, leftY});
+    Point point12({leftX, rightY});
+    Point point21({rightX, rightY});
+    Point point22({rightX, leftY});
+
+    if ((rightY - leftY) * (rightX - leftX) != sumArea ||!cnt.count(point11)||!cnt.count(point12)||!cnt.count(point21)||!cnt.count(point22))
+        return false;
+    cnt.erase(point11);
+    cnt.erase(point12);
+    cnt.erase(point21);
+    cnt.erase(point22);
+    for (auto &s:cnt) {
+        int value = s.second;
+        if (value != 2 && value != 4)
+            return false;
+    }
+    return true;
+}
+
+int solutions::maxProduct(vector<string> &words) {
+    int n=words.size();
+    int ans=0;
+    vector<int> masks(n,0);
+    for (int i = 0; i < n; ++i) {
+        for (auto c:words[i]) {
+            masks[i]|=1<<(c-'a');
+        }
+    }
+    for (int i = 0; i < n; ++i) {
+        for (int j = i; j < n; ++j) {
+            ans = max(ans, int(words[i].size()*words[j].size()));
+        }
+    }
+    return ans;
+}
+
+int solutions::isCover(string &basicString, string &basicString1) {
+    int m=basicString.size(), n=basicString1.size();
+    unordered_set<char> s1;
+    for (auto c:basicString) {
+        s1.insert(c);
+    }
+    for (auto c:basicString1) {
+        if (s1.count(c))
+            return -1;
+    }
+    return m*n;
+}
+
+
+int solutions::integerReplacement(int n) {
+    if (n==1)
+        return 0;
+    if(n==INT_MAX)
+        return 32;
+    if(n&1)
+        return 1+min(integerReplacement(n-1), integerReplacement(n+1));
+    else
+        return integerReplacement(n/2)+1;
+}
+
+int solutions::findLHS(vector<int> &nums) {
+    unordered_map<int, int> cnt;
+    for (int i:nums){
+        cnt[i]++;
+    }
+    int lhs=0;
+    for (auto [key, val]:cnt) {
+        if (cnt.count(key+1))
+            lhs= max(cnt[key+1]+val, lhs);
+    }
+    return lhs;
+}
+

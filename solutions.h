@@ -10,6 +10,7 @@
 #include <stack>
 #include <unordered_map>
 #include <unordered_set>
+#include <map>
 
 using namespace std;
 class solutions {
@@ -51,8 +52,12 @@ public:
     int findPoisonedDuration(vector<int>& timeSeries, int duration);
     int getMoneyAmount(int n) ;
     bool detectCapitalUse(string word);
-
-    };
+    bool isRectangleCover(vector<vector<int>>& rectangles);
+    int maxProduct(vector<string>& words);
+    int isCover(basic_string<char> &basicString, basic_string<char> &basicString1);
+    int integerReplacement(int n);
+    int findLHS(vector<int>& nums);
+};
 
 int count1(int n);
 
