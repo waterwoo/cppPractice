@@ -674,7 +674,7 @@ int solutions::trap(vector<int> &height) {
 int solutions::longestSubsequence(vector<int> &arr, int difference) {
 //    int n=arr.size();
 //    if (n==1)
-        return 1;
+    return 1;
     // 令 dp[i]表示以 arr[i] 为结尾的最长的等差子序列的长度
 
 }
@@ -692,7 +692,7 @@ int solutions::missingNumber(vector<int> &nums) {
 //    return 0;
     int n = nums.size();
     int sum = 0;
-    for (int k:nums) {
+    for (int k: nums) {
         sum += k;
     }
     return n * (n + 1) / 2 - sum;
@@ -793,7 +793,7 @@ bool solutions::isRectangleCover(vector<vector<int>> &rectangles) {
         cnt[point4]++;
 
         sumArea += (s[3] - s[1]) * (s[2] - s[0]);
-        cout<<sumArea<<endl;
+        cout << sumArea << endl;
 //        cnt.insert()
         if (s[0] < leftX)
             leftX = s[0];
@@ -809,13 +809,14 @@ bool solutions::isRectangleCover(vector<vector<int>> &rectangles) {
     Point point21({rightX, rightY});
     Point point22({rightX, leftY});
 
-    if ((rightY - leftY) * (rightX - leftX) != sumArea ||!cnt.count(point11)||!cnt.count(point12)||!cnt.count(point21)||!cnt.count(point22))
+    if ((rightY - leftY) * (rightX - leftX) != sumArea || !cnt.count(point11) || !cnt.count(point12) ||
+        !cnt.count(point21) || !cnt.count(point22))
         return false;
     cnt.erase(point11);
     cnt.erase(point12);
     cnt.erase(point21);
     cnt.erase(point22);
-    for (auto &s:cnt) {
+    for (auto &s: cnt) {
         int value = s.second;
         if (value != 2 && value != 4)
             return false;
@@ -824,57 +825,96 @@ bool solutions::isRectangleCover(vector<vector<int>> &rectangles) {
 }
 
 int solutions::maxProduct(vector<string> &words) {
-    int n=words.size();
-    int ans=0;
-    vector<int> masks(n,0);
+    int n = words.size();
+    int ans = 0;
+    vector<int> masks(n, 0);
     for (int i = 0; i < n; ++i) {
-        for (auto c:words[i]) {
-            masks[i]|=1<<(c-'a');
+        for (auto c: words[i]) {
+            masks[i] |= 1 << (c - 'a');
         }
     }
     for (int i = 0; i < n; ++i) {
         for (int j = i; j < n; ++j) {
-            ans = max(ans, int(words[i].size()*words[j].size()));
+            ans = max(ans, int(words[i].size() * words[j].size()));
         }
     }
     return ans;
 }
 
 int solutions::isCover(string &basicString, string &basicString1) {
-    int m=basicString.size(), n=basicString1.size();
+    int m = basicString.size(), n = basicString1.size();
     unordered_set<char> s1;
-    for (auto c:basicString) {
+    for (auto c: basicString) {
         s1.insert(c);
     }
-    for (auto c:basicString1) {
+    for (auto c: basicString1) {
         if (s1.count(c))
             return -1;
     }
-    return m*n;
+    return m * n;
 }
 
 
 int solutions::integerReplacement(int n) {
-    if (n==1)
+    if (n == 1)
         return 0;
-    if(n==INT_MAX)
+    if (n == INT_MAX)
         return 32;
-    if(n&1)
-        return 1+min(integerReplacement(n-1), integerReplacement(n+1));
+    if (n & 1)
+        return 1 + min(integerReplacement(n - 1), integerReplacement(n + 1));
     else
-        return integerReplacement(n/2)+1;
+        return integerReplacement(n / 2) + 1;
 }
 
 int solutions::findLHS(vector<int> &nums) {
     unordered_map<int, int> cnt;
-    for (int i:nums){
+    for (int i: nums) {
         cnt[i]++;
     }
-    int lhs=0;
-    for (auto [key, val]:cnt) {
-        if (cnt.count(key+1))
-            lhs= max(cnt[key+1]+val, lhs);
+    int lhs = 0;
+    for (auto[key, val]: cnt) {
+        if (cnt.count(key + 1))
+            lhs = max(cnt[key + 1] + val, lhs);
     }
     return lhs;
+}
+
+void solutions::solveSudoku(vector<vector<char>> &board) {
+
+}
+
+vector<int> solutions::findAnagrams(string s, string p) {
+    // 烂尾待续
+    vector<int> cnt(26, 0);
+    vector<int> ans;
+    int length = p.size();
+    for (auto c: p) {
+        cnt[c - 'a']++;
+    }
+    vector<int> tmp;
+
+    for (int i = 0; i < s.size(); ++i) {
+        if (cnt[s[i] - 'a']) {
+            if (tmp.empty()) {
+                tmp.resize(26, 0);
+                for (int j = i; j < length + i && j < s.size(); ++j) {
+                    if (cnt[s[j] - 'a'] == 0) {
+                        i = j;
+                        tmp.clear();
+                        break;
+                    } else {
+                        tmp[s[j] - 'a']++;
+                    }
+                }
+            } else {
+                tmp[s[i] - 'a']++;
+                tmp[s[i-1] - 'a']--;
+            }
+            if (tmp == cnt)
+                ans.emplace_back(i);
+        }
+    }
+
+    return ans;
 }
 

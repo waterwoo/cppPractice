@@ -57,6 +57,8 @@ public:
     int isCover(basic_string<char> &basicString, basic_string<char> &basicString1);
     int integerReplacement(int n);
     int findLHS(vector<int>& nums);
+    void solveSudoku(vector<vector<char>>& board);
+    vector<int> findAnagrams(string s, string p);
 };
 
 int count1(int n);
