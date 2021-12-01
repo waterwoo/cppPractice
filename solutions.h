@@ -8,11 +8,24 @@
 #include <string>
 #include <iostream>
 #include <stack>
+#include <queue>
 #include <unordered_map>
 #include <unordered_set>
 #include <map>
+#include "binaryTreeNode.h"
+#include <algorithm>
+#include <cmath>
+
 
 using namespace std;
+
+//struct TreeNode {
+//    int val;
+//    TreeNode *left;
+//    TreeNode *right;
+//    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+//};
+
 class solutions {
 public:
     int thirdMax(std::vector<int>& nums);
@@ -59,6 +72,19 @@ public:
     int findLHS(vector<int>& nums);
     void solveSudoku(vector<vector<char>>& board);
     vector<int> findAnagrams(string s, string p);
+    int getN(int k);
+    vector<int> kthSmallestPrimeFraction(vector<int>& arr, int k);
+
+    vector<int> serialize(TreeNode *root);
+
+    TreeNode *deserialize(vector<int> data);
+
+    bool buddyStrings(string s, string goal);
+    int findLength(int n);
+    int findNthDigit(int n);
+    int findMinStep(string board, string hand);
+
+    void adapt(string basicString);
 };
 
 int count1(int n);

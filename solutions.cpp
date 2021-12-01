@@ -9,6 +9,7 @@
 
 using namespace std;
 
+
 int solutions::thirdMax(std::vector<int> &nums) {
     std::sort(nums.begin(), nums.end());
     std::reverse(nums.begin(), nums.end());
@@ -879,6 +880,59 @@ int solutions::findLHS(vector<int> &nums) {
     return lhs;
 }
 
+vector<int> solutions::serialize(TreeNode *root) {
+    if (!root)
+        return {};
+    vector<int> ans;
+    queue<TreeNode *> q;
+    q.push(root);
+    int null = 1001;
+    while (!q.empty()) {
+        auto curr = q.front();
+        q.pop();
+        ans.push_back(curr->val);
+        if (curr->left)
+            q.push(curr->left);
+        else
+            ans.emplace_back(null);
+        if (curr->right)
+            q.push(curr->right);
+        else
+            ans.emplace_back(null);
+    }
+    return ans;
+}
+
+TreeNode *solutions::deserialize(vector<int> data) {
+    if (data.empty())
+        return nullptr;
+    for (int i = 1; i < data.size() + 1; ++i) {
+        if (data[i - 1] != 1001)
+            auto tmp = new TreeNode(data[i - 1]);
+    }
+    return nullptr;
+}
+
+bool solutions::buddyStrings(string s, string goal) {
+    if (s.size() != goal.size())
+        return false;
+    int dif = 0;
+    unordered_map<char, int> cnt1, cnt2;
+    for (int i = 0; i < s.size(); ++i) {
+        cnt1[s[i]]++;
+        cnt2[goal[i]]++;
+        if (s[i] != goal[i])
+            dif++;
+    }
+    if (dif == 2 && cnt1 == cnt2)
+        return true;
+    for (auto[key, cnt]: cnt1) {
+        if (cnt > 1 && cnt2[key] > 1 && dif == 0)
+            return true;
+    }
+    return false;
+}
+
 void solutions::solveSudoku(vector<vector<char>> &board) {
 
 }
@@ -908,7 +962,7 @@ vector<int> solutions::findAnagrams(string s, string p) {
                 }
             } else {
                 tmp[s[i] - 'a']++;
-                tmp[s[i-1] - 'a']--;
+                tmp[s[i - 1] - 'a']--;
             }
             if (tmp == cnt)
                 ans.emplace_back(i);
@@ -916,5 +970,98 @@ vector<int> solutions::findAnagrams(string s, string p) {
     }
 
     return ans;
+}
+
+int solutions::getN(int k) {
+    int i = 0;
+    for (; i < k; i++) {
+        if ((i + 1) * i / 2 <= k && (i + 2) * (i + 1) / 2 >= k)
+            return ++i;
+    }
+    return 0;
+}
+
+vector<int> solutions::kthSmallestPrimeFraction(vector<int> &arr, int k) {
+    int i = getN(k);
+    int n = arr.size();
+    int x = k - (i - 1) * i / 2;
+    map<float, pair<int, int>> ans;
+    for (int j = 0; j < i; j++) {
+        ans[float(arr[j]) / float(arr[n + j -i])] = {arr[j], arr[n + j -i]};
+    }
+    auto it = ans.begin();
+    for (int j = 1; j < x; ++j) {
+        it++;
+    }
+    return {it->second.first, it->second.second};
+}
+
+int solutions::findNthDigit(int n) {
+    int i=0;
+    for (; i < 9; ++i) {
+//cout<< i << ":  "<<findLength(i)<<"\n";
+        if (n>= findLength(i) && n <= findLength(i+1))
+            break;
+    }
+
+    // 具体的数字
+    int x = findLength(i);
+    int base= pow(10, i);
+    int index = ceil(float (n- x)/(i+1))+ base -1;
+    // 在数字的第几位
+    int diff = (n- x-(index- base)*(i+1));
+    string indexS = to_string(index);
+    return (indexS[diff-1]-'0');
+}
+
+int solutions::findLength(int n) {
+    if (n==0)
+        return 0;
+    if (n==9)
+        return INT_MAX;
+    // 返回数n的第一个数字的位置
+    int cnt=1;
+    long length=0;
+    while (n--){
+        length+=((pow(10, cnt)- pow(10,(cnt-1)))*cnt++);
+    }
+    return length;
+}
+
+int solutions::findMinStep(string board, string hand) {
+    // BFS
+    // not cut first
+    queue<pair<string, string>> q;
+    q.push({board, hand});
+    int ans=0;
+    while (!q.empty()){
+        int length = q.size();
+        ans++;
+        for (int i = 0; i < length; ++i) {
+            auto [bod, had] = q.front();
+            q.pop();
+            for (int j = 0; j < bod.size(); ++j) {
+                for (int k = 0; k < had.size(); ++k) {
+                    bod.insert(i,1,had[k]);
+                    adapt(bod);
+                }
+            }
+        }
+    }
+    return 0;
+}
+
+void solutions::adapt(string s) {
+    int cnt=0;
+    char tmp=s[0];
+    for (int i = 0; i < s.size(); ++i) {
+        if (s[i]==tmp)
+            cnt++;
+        else{
+            cnt=1;
+            tmp=s[i];
+
+        }
+    }
 }
 
