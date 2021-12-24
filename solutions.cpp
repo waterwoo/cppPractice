@@ -908,7 +908,7 @@ vector<int> solutions::findAnagrams(string s, string p) {
                 }
             } else {
                 tmp[s[i] - 'a']++;
-                tmp[s[i-1] - 'a']--;
+                tmp[s[i - 1] - 'a']--;
             }
             if (tmp == cnt)
                 ans.emplace_back(i);
@@ -917,4 +917,336 @@ vector<int> solutions::findAnagrams(string s, string p) {
 
     return ans;
 }
+
+vector<int> solutions::maxSumOfThreeSubarrays(vector<int> &nums, int k) {
+    int n = nums.size();
+    int sum1 = 0, sum2 = 0, sum3 = 0;
+    int Idx1 = 0, Idx11 = 0, Idx12 = 0, Idx3;
+    int max1 = 0, max2 = 0, max3 = 0;
+    vector<int> ans;
+    for (int i = 2 * k; i < n; ++i) {
+        sum1 += nums[i - 2 * k];
+        sum2 += nums[i - k];
+        sum3 += nums[i];
+        if (i > 3 * k - 2) {
+            if (sum1 > max1) {
+                Idx1 = i - 3 * k + 1;
+                max1 = sum1;
+            }
+            if (max1 + sum2 > max2) {
+                Idx11 = Idx1;
+                Idx12 = i - 2 * k + 1;
+                max2 = max1 + sum2;
+            }
+            if (max2 + sum3 > max3) {
+                Idx3 = i - k + 1;
+                max3 = max2 + sum3;
+                ans = {Idx11, Idx12, Idx3};
+            }
+            sum1 -= nums[i - 3 * k + 1];
+            sum2 -= nums[i - 2 * k + 1];
+            sum3 -= nums[i - k + 1];
+        }
+    }
+    return ans;
+}
+
+string solutions::shortestCompletingWord(string licensePlate, vector<string> &words) {
+    unordered_map<char, int> cnt;
+    for (auto c: licensePlate) {
+        if (islower(c)) {
+            cnt[c]++;
+        }
+        if (isupper(c)) {
+            cnt[(char) tolower(c)]++;
+        }
+    }
+    string ans;
+    for (auto word: words) {
+
+    }
+    return ans;
+}
+
+int solutions::maxIncreaseKeepingSkyline(vector<vector<int>> &grid) {
+    int row = grid.size(), col = grid[0].size();
+    vector<int> rowM(row, 0), colM(col, 0);
+    int tmp = 0;
+    for (int i = 0; i < row; ++i) {
+        for (int j = 0; j < col; ++j) {
+            tmp = max(tmp, grid[i][j]);
+        }
+        rowM[i] = tmp;
+        tmp = 0;
+    }
+    for (int i = 0; i < col; ++i) {
+        for (int j = 0; j < row; ++j) {
+            tmp = max(tmp, grid[j][i]);
+        }
+        colM[i] = tmp;
+        tmp = 0;
+    }
+    int ans = 0;
+    for (int i = 0; i < row; ++i) {
+        for (int j = 0; j < col; ++j) {
+            tmp = min(rowM[i], colM[j]) - grid[i][j];
+            if (tmp > 0)
+                ans += tmp;
+        }
+    }
+    return ans;
+}
+
+int solutions::visiblePoints(vector<vector<int>> &points, int angle, vector<int> &location) {
+    vector<double> angles;
+    double k = 180.0 / 3.14159;
+    int flag = 0;
+    for (auto pos: points) {
+        if (pos == location) {
+            flag++;
+            continue;
+        }
+        auto a = atan2((pos[1] - location[1]), (pos[0] - location[0])) * k;
+        angles.emplace_back(a);
+    }
+    std::sort(angles.begin(), angles.end());
+    int n = angles.size();
+    for (int i = 0; i < n; ++i) {
+        if (angles[i] + 360 - angles[n - 1] <= angle)
+            angles.push_back(angles[i] + 360);
+        else
+            break;
+    }
+    int ans = 0, cur = 0;
+    int end = 0;
+
+    for (int i = 0; i < angles.size(); ++i) {
+        while (end < angles.size() && angles[end] <= angles[i] + angle) {
+            end++;
+        }
+        ans = max(ans, end - i);
+    }
+    return ans + flag;
+
+
+//    int sameCnt = 0;
+//    vector<double> polarDegrees;
+//    for (auto & point : points) {
+//        if (point[0] == location[0] && point[1] == location[1]) {
+//            sameCnt++;
+//            continue;
+//        }
+//        double degree = atan2(point[1] - location[1], point[0] - location[0]);
+//        polarDegrees.emplace_back(degree);
+//    }
+//    sort(polarDegrees.begin(), polarDegrees.end());
+//
+//    int m = polarDegrees.size();
+//    for (int i = 0; i < m; ++i) {
+//        polarDegrees.emplace_back(polarDegrees[i] + 2 * M_PI);
+//    }
+//
+//    int maxCnt = 0;
+//    int right = 0;
+//    double degree = angle * M_PI / 180;
+//    for (int i = 0; i < m; ++i) {
+//        while (right < polarDegrees.size() && polarDegrees[right] <= polarDegrees[i] + degree) {
+//            right++;
+//        }
+//        maxCnt = max(maxCnt, right - i);
+//    }
+//    return maxCnt + sameCnt;
+}
+
+int solutions::countBattleships(vector<vector<char>> &board) {
+    int cnt = 0;
+
+    for (int i = 0; i < board.size(); ++i) {
+        for (int j = 0; j < board[0].size(); ++j) {
+            if (board[i][j] == 'X')
+                bfs(i, j, board, cnt);
+        }
+    }
+    return cnt;
+}
+
+void solutions::bfs(int i, int j, vector<vector<char>> &board, int &cnt) {
+    if (board[i][j] == 'v')
+        return;
+    if (board[i][j] == 'X') {
+        cnt++;
+        if (j < board[0].size() - 1 && board[i][j + 1] == 'X') {
+            vertical(i, j, board);
+        } else if (i < board.size() - 1 && board[i + 1][j] == 'X') {
+            horizontal(i, j, board);
+        }
+    }
+}
+
+void solutions::vertical(int i, int j, vector<vector<char>> &board) {
+    if (j == board[0].size())
+        return;
+    if (board[i][j] == 'X') {
+        board[i][j] = 'v';
+        vertical(i, j + 1, board);
+    } else
+        return;
+}
+
+void solutions::horizontal(int i, int j, vector<vector<char>> &board) {
+    if (i == board.size())
+        return;
+    if (board[i][j] == 'X') {
+        board[i][j] = 'v';
+        horizontal(i + 1, j, board);
+    } else
+        return;
+}
+
+bool solutions::repeatedSubstringPattern(string s) {
+    return (s + s).find(s, 1) != s.size();
+}
+
+int solutions::repeatedStringMatch(string a, string b) {
+//        int strStr(string &haystack, string &needle) {
+//            int n = haystack.size(), m = needle.size();
+//            if (m == 0) {
+//                return 0;
+//            }
+//            vector<int> pi(m);
+//            for (int i = 1, j = 0; i < m; i++) {
+//                while (j > 0 && needle[i] != needle[j]) {
+//                    j = pi[j - 1];
+//                }
+//                if (needle[i] == needle[j]) {
+//                    j++;
+//                }
+//                pi[i] = j;
+//            }
+//            for (int i = 0, j = 0; i - j < n; i++) { // b 开始匹配的位置是否超过第一个叠加的 a
+//                while (j > 0 && haystack[i % n] != needle[j]) { // haystack 是循环叠加的字符串，所以取 i % n
+//                    j = pi[j - 1];
+//                }
+//                if (haystack[i % n] == needle[j]) {
+//                    j++;
+//                }
+//                if (j == m) {
+//                    return i - m + 1;
+//                }
+//            }
+//            return -1;
+//        }
+
+//        int repeatedStringMatch(string a, string b) {
+//            int an = a.size(), bn = b.size();
+//            int index = strStr(a, b);
+//            if (index == -1) {
+//                return -1;
+//            }
+//            if (an - index >= bn) {
+//                return 1;
+//            }
+//            return (bn + index - an - 1) / an + 2;
+//        }
+//    };
+}
+
+int solutions::kmp(string haystack, string needle) {
+    // compare string using kmp
+    // haystack: target
+    // needle: pattern
+    if (needle.empty())
+        return 0;
+    vector<int> next(needle.size(), 0);
+
+
+    for (int i = 0; i < needle.size(); ++i) {
+        string tmp = needle.substr(0, i + 1);
+        for (int j = 0; j < (i + 1) / 2; ++j) {
+            if (tmp[j] == tmp[(i - j)])
+                next[i]++;
+            else
+                break;
+        }
+    }
+
+
+    int ret = 0, maxN;
+    for (int i = 0, j = 0; i < haystack.size(); ++i, ++j) {
+        if (haystack[i] != needle[j]) {
+            if (j == 0){
+                ret++;
+                j--;
+            }
+            else {
+                maxN = *max_element(next.begin(), next.begin() + i);
+                ret += maxN;
+                j = maxN - 1;
+                i--;
+            }
+        } else {
+            if (j == needle.size() - 1)
+                return ret;
+        }
+    }
+    return -1;
+}
+
+
+struct cla {
+    int n;
+    int pre;
+};
+
+//bool solutions::canFinish(int numCourses, vector<vector<int>> &prerequisites) {
+//    unordered_set<cla> preq;
+//    for (auto p:prerequisites) {
+//        preq.insert(pair<p[0],p[1]>);
+//    }
+//    vector<int> visited(numCourses, 0);
+//    unordered_set<int> visiting;
+//    bool ans= true;
+//    for (int i = 0; i < numCourses; ++i) {
+//        if (visited[i] == 0){
+//            ans = dfs(i, numCourses, visited,visiting, prerequisites);
+//        }
+//    }
+//    if (!ans)
+//        return false;
+//    for (int i = 0; i < numCourses; ++i) {
+//        if (visited[i] == 0)
+//            return false;
+//    }
+//    return true;
+//}
+//
+//bool solutions::dfs(int i, int courses, vector<int> &visited,unordered_set<int> &visiting, vector<vector<int>> &prerequisites) {
+//    if (visited[i] == 1)
+//        return true;
+//    visiting.insert(i);
+//    int p = INT_MAX;
+//    for () {
+//        if (xx[0]==i){
+//                p = xx[1];
+//                if (visiting.count(p)){
+//                    return false;
+//                }
+//                if (visited[p] == 1)
+//                    visited[i] = 1;
+//                else{
+//                    auto x=dfs(p, courses, visited,visiting, prerequisites);
+//                    if (!x)
+//                        return false;
+//                    else{
+//                        prerequisites.erase()
+//                    }
+//                }
+//        }
+//    }
+//    visited[i] = 1;
+//    visiting.erase(i);
+//    return true;
+//}
+
+
 

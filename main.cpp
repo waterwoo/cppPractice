@@ -6,10 +6,7 @@ using namespace std;
 
 int main() {
     solutions sl;
-    string s{"cbaebabacd"}, p{"abc"};
-    auto ans = sl.findAnagrams(s, p);
-    for (auto c: ans) {
-        cout << c << endl;
-    }
+    string a = "mississippi", b = "issip";
+    cout << sl.kmp(a,b);
     return 0;
 }

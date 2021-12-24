@@ -11,6 +11,8 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <map>
+#include <queue>
+#include <math.h>
 
 using namespace std;
 class solutions {
@@ -59,9 +61,62 @@ public:
     int findLHS(vector<int>& nums);
     void solveSudoku(vector<vector<char>>& board);
     vector<int> findAnagrams(string s, string p);
-};
+    vector<int> maxSumOfThreeSubarrays(vector<int>& nums, int k);
+    string shortestCompletingWord(string licensePlate, vector<string>& words);
+    int maxIncreaseKeepingSkyline(vector<vector<int>>& grid);
+    bool canFinish(int numCourses, vector<vector<int>>& prerequisites);
+    bool dfs(int i, int courses, vector<int> &visited,unordered_set<int> &visiting, vector<vector<int>> &prerequisites);
+    int visiblePoints(vector<vector<int>>& points, int angle, vector<int>& location);
+    int countBattleships(vector<vector<char>>& board);
+
+    void bfs(int i, int j, vector<vector<char>> &vector, int &cnt);
+
+    void vertical(int i, int j, vector<vector<char>> &vector);
+
+    void horizontal(int i, int j, vector<vector<char>> &vector);
+    bool repeatedSubstringPattern(string s);
+    int repeatedStringMatch(string a, string b);
+    int kmp(string haystack, string needle);
+    };
 
 int count1(int n);
+
+
+class Solution {
+public:
+    int strStr(string haystack, string needle) {
+        int n = haystack.size(), m = needle.size();
+        if (m == 0) {
+            return 0;
+        }
+        vector<int> next(m);
+
+
+        for (int i = 1, j = 0; i < m; i++) {
+            while (j > 0 && needle[i] != needle[j]) {
+                j = next[j - 1];
+            }
+            if (needle[i] == needle[j]) {
+                j++;
+            }
+            next[i] = j;
+        }
+
+
+        for (int i = 0, j = 0; i < n; i++) {
+            while (j > 0 && haystack[i] != needle[j]) {
+                j = next[j - 1];
+            }
+            if (haystack[i] == needle[j]) {
+                j++;
+            }
+            if (j == m) {
+                return i - m + 1;
+            }
+        }
+        return -1;
+    }
+};
 
 
 #endif //CPPPRACTICE_SOLUTIONS_H
