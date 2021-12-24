@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 project(cppPractice)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 
 add_executable(cppPractice main.cpp sumOfTwoInt.cpp sumOfTwoInt.h
         climbStairs.cpp climbStairs.h minCostClimbingStairs.cpp

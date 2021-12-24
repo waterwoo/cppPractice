@@ -13,6 +13,10 @@
 #include <map>
 #include <queue>
 #include <math.h>
+#include "binaryTreeNode.h"
+#include <algorithm>
+#include <cmath>
+
 
 using namespace std;
 class solutions {
@@ -61,6 +65,20 @@ public:
     int findLHS(vector<int>& nums);
     void solveSudoku(vector<vector<char>>& board);
     vector<int> findAnagrams(string s, string p);
+    int getN(int k);
+    vector<int> kthSmallestPrimeFraction(vector<int>& arr, int k);
+
+    vector<int> serialize(TreeNode *root);
+
+    TreeNode *deserialize(vector<int> data);
+
+    bool buddyStrings(string s, string goal);
+    int findLength(int n);
+    int findNthDigit(int n);
+    int findMinStep(string board, string hand);
+
+    void adapt(string basicString);
+
     vector<int> maxSumOfThreeSubarrays(vector<int>& nums, int k);
     string shortestCompletingWord(string licensePlate, vector<string>& words);
     int maxIncreaseKeepingSkyline(vector<vector<int>>& grid);
